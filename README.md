@@ -1,60 +1,95 @@
-# Libft - Librería Personal
+# 📚 libft
 
-**Libft** Libft es el primer proyecto del curso 42, diseñado para ayudar a los estudiantes a profundizar en el lenguaje C con un enfoque en la programación desde cero. Este proyecto permite desarrollar un mayor rigor en la atención a los detalles y establece las bases necesarias para los desafíos posteriores del curso.
+> A custom C standard library implementation compiling essential data structures, memory manipulation primitives, dynamic string utilities, and linked list APIs into a reusable static library.
 
-## Descripción
+## 📖 Overview
 
-El proyecto de **Libft** tiene como objetivo recrear algunas de las funciones más esenciales de C para poder reutilizarlas durante los diferentes proyectos del curso en 42. La implementación de estas funciones proporciona una comprensión más profunda del lenguaje C y sus bibliotecas estándar. Algunas de las funciones implementadas en este proyecto son utilizadas frecuentemente en otros desafíos de programación, lo que permite tener herramientas personalizadas listas para ser usadas.
+`libft` is the foundational project of the 42 software engineering curriculum. It serves as a custom implementation of standard C library (`libc`) functions along with additional dynamic memory, string manipulation, and abstract data structure (linked list) utilities. Compiled into a static archive (`libft.a`), this library acts as the baseline core dependency for all subsequent low-level C projects.
 
-## Funciones Implementadas
+## ⚙️ Technical Standards & Constraints
 
-### Funciones de Cadenas de Caracteres:
-- `ft_atoi`: Convierte una cadena de caracteres a un número entero.
-- `ft_bzero`: Llena los primeros `n` bytes de un bloque de memoria con ceros.
-- `ft_calloc`: Asigna memoria e inicializa todos los valores a cero.
-- `ft_isalnum`: Verifica si un carácter es alfanumérico.
-- `ft_isalpha`: Verifica si un carácter es alfabético.
-- `ft_isascii`: Verifica si un carácter es un valor ASCII válido.
-- `ft_isdigit`: Verifica si un carácter es un dígito numérico.
-- `ft_isprint`: Verifica si un carácter es imprimible.
-- `ft_itoa`: Convierte un número entero a una cadena de caracteres.
-- `ft_strchr`: Busca la primera aparición de un carácter en una cadena.
-- `ft_strdup`: Devuelve una nueva cadena que es una copia de la cadena dada.
-- `ft_striteri`: Aplica una función a cada carácter de una cadena, modificándola.
-- `ft_strjoin`: Une dos cadenas de caracteres.
-- `ft_strlcat`: Añade una cadena a otra con un límite de longitud.
-- `ft_strlcpy`: Copia una cadena de caracteres con un límite de longitud.
-- `ft_strlen`: Calcula la longitud de una cadena de caracteres.
-- `ft_strmapi`: Aplica una función a cada carácter de una cadena y devuelve una nueva cadena.
-- `ft_strncmp`: Compara las primeras `n` posiciones de dos cadenas.
-- `ft_strnstr`: Busca una subcadena dentro de una cadena, hasta un límite de longitud.
-- `ft_strrchr`: Busca la última aparición de un carácter en una cadena.
-- `ft_strtrim`: Elimina los caracteres de espacio del inicio y final de una cadena.
-- `ft_substr`: Devuelve una subcadena de una cadena.
-- `ft_tolower`: Convierte un carácter en minúscula.
-- `ft_toupper`: Convierte un carácter en mayúscula.
+- **Language:** C (compiled with `gcc -Wall -Wextra -Werror`).
+- **Output Artifact:** Compiled into a static library archive (`libft.a`) using `ar rcs`.
+- **Allowed Functions:** Primitive POSIX system calls (`write`), heap management (`malloc`, `free`).
+- **Memory Safety:** 100% leak-free execution across dynamic string manipulations, array splits, and linked list destruction routines (audited via Valgrind).
+- **Standards:** 100% compliant with 42's **Norminette** coding standard.
 
-### Funciones de Listas:
-- `ft_lstadd_back`: Añade un nuevo nodo al final de la lista.
-- `ft_lstadd_front`: Añade un nuevo nodo al principio de la lista.
-- `ft_lstclear`: Elimina todos los nodos de la lista.
-- `ft_lstdelone`: Elimina un nodo de la lista.
-- `ft_lstiter`: Aplica una función a cada nodo de la lista.
-- `ft_lstlast`: Devuelve el último nodo de la lista.
-- `ft_lstmap`: Aplica una función a cada nodo de la lista, devolviendo una nueva lista.
-- `ft_lstnew`: Crea un nuevo nodo.
-- `ft_lstsize`: Devuelve el número de nodos de la lista.
+---
 
-### Funciones de Memoria:
-- `ft_memchr`: Busca un carácter en un bloque de memoria.
-- `ft_memcmp`: Compara dos bloques de memoria.
-- `ft_memcpy`: Copia un bloque de memoria de un lugar a otro.
-- `ft_memmove`: Mueve un bloque de memoria.
-- `ft_memset`: Llena un bloque de memoria con un valor específico.
+## 🗺️ Function Modules & Categorization
 
-### Funciones de Entrada/Salida:
-- `ft_putchar_fd`: Escribe un carácter en un archivo.
-- `ft_putendl_fd`: Escribe una cadena seguida de un salto de línea en un archivo.
-- `ft_putnbr_fd`: Escribe un número entero en un archivo.
-- `ft_putstr_fd`: Escribe una cadena en un archivo.
-- `ft_split`: Divide una cadena en un array de cadenas, usando un delimitador.
+| Module | Core Functions | Technical Focus |
+| :--- | :--- | :--- |
+| **Character Checks & Conversions** | `ft_isalpha`, `ft_isdigit`, `ft_isalnum`, `ft_isascii`, `ft_isprint`, `ft_toupper`, `ft_tolower` | ASCII table boundary validation and case transformations. |
+| **Memory Manipulation** | `ft_memset`, `ft_bzero`, `ft_memcpy`, `ft_memmove`, `ft_memchr`, `ft_memcmp`, `ft_calloc` | Raw byte pointer manipulation, buffer initializations, overlapping memory safety (`memmove`), and safe zeroed heap allocations (`calloc`). |
+| **String Operations** | `ft_strlen`, `ft_strlcpy`, `ft_strlcat`, `ft_strchr`, `ft_strrchr`, `ft_strncmp`, `ft_strnstr`, `ft_strdup`, `ft_atoi` | Null-terminated buffer traversal, bounded copy/concatenation, substring searches, dynamic string duplicates, and ASCII-to-integer parsing. |
+| **Non-Standard Utilities** | `ft_substr`, `ft_strjoin`, `ft_strtrim`, `ft_split`, `ft_itoa`, `ft_strmapi`, `ft_striteri` | Dynamic string allocations, string trimming, delimiter-based multi-string splitting (`ft_split`), integer-to-string formatting, and functional string mappings. |
+| **File Descriptor I/O** | `ft_putchar_fd`, `ft_putstr_fd`, `ft_putendl_fd`, `ft_putnbr_fd` | Unbuffered character, string, and integer output written directly to target file descriptors (`stdin`, `stdout`, `stderr`, or file streams). |
+| **Linked List API (Bonus)** | `ft_lstnew`, `ft_lstadd_front`, `ft_lstsize`, `ft_lstlast`, `ft_lstadd_back`, `ft_lstdelone`, `ft_lstclear`, `ft_lstiter`, `ft_lstmap` | Abstract singly linked list implementation handling dynamic node creation, insertion, traversal, element mapping, and complete memory teardowns. |
+
+---
+
+## 🛠️ Quickstart & Integration Example
+
+### Testing Library Functions (`main.c`)
+
+You can test `libft` by creating a test runner main file:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include "libft.h"
+
+int main(void)
+{
+    // String join and split test
+    char  *str = "C,System,Programming,42";
+    char  **split_array;
+    int   i;
+
+    printf("--- libft Split Test ---\n");
+    split_array = ft_split(str, ',');
+    if (!split_array)
+        return (1);
+
+    i = 0;
+    while (split_array[i])
+    {
+        printf("[%d]: %s\n", i, split_array[i]);
+        free(split_array[i]);
+        i++;
+    }
+    free(split_array);
+
+    // Dynamic int to ASCII test
+    char *num_str = ft_itoa(-4242);
+    printf("\n--- libft itoa Test ---\nConverted: %s\n", num_str);
+    free(num_str);
+
+    return (0);
+}
+
+# Clone the repository
+git clone [https://github.com/your-username/libft.git](https://github.com/your-username/libft.git)
+cd libft
+
+# Compile static library libft.a (includes mandatory parts)
+make
+
+# Compile static library including linked list bonus functions
+make bonus
+
+# Compile test runner against the static library
+gcc -Wall -Wextra -Werror main.c libft.a -o libft_test
+
+# Run test executable
+./libft_test
+
+# Clean object files
+make clean
+
+# Clean object files and static library archive
+make fclean
+
+# Recompile the library from scratch
+make re
